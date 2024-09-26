@@ -1,14 +1,14 @@
 [
     {
         "user": "ulysse",
-        "content": "Hello"
+        "content": "Comment conteneuriser Flask ?"
     },
     {
-        "user": "Leo",
-        "content": "Salut\r\n"
+        "user": "L\u00e9o",
+        "content": "Utilise docker, trouve l'image de flask sur Dockerhub"
     },
     {
-        "user": "attacker",
-        "content": "<script>alert('XSS')</script>"
+        "user": "Eliot",
+        "content": "Tu peux creer un image personnalis\u00e9e avec un Dockerfile puis la construire avec Docker build"
     }
 ]
