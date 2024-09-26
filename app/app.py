@@ -40,7 +40,6 @@ def home():
 def search_user():
     username = request.form["username"]
 
-    # Requête SQL vulnérable à l'injection
     query = f"SELECT * FROM users WHERE username = '{username}'"
 
     conn = get_db_connection()
@@ -62,7 +61,6 @@ def search_user():
 def search_transactions():
     user_id = request.form["user_id"]
 
-    # Requête SQL vulnérable à l'injection pour les transactions
     query = f"SELECT * FROM transactions WHERE user_id = {user_id}"
 
     conn = get_db_connection()
@@ -84,7 +82,6 @@ def search_transactions():
 def search_profile():
     username = request.form["username"]
 
-    # Requête SQL vulnérable à l'injection pour le profil utilisateur
     query = f"""
         SELECT p.first_name, p.last_name, p.address, p.phone, p.birthdate
         FROM profiles p
