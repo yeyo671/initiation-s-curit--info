@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template_string
+from flask import Flask, request, render_template, render_template_string
 import mysql.connector
 
 app = Flask(__name__)
@@ -14,26 +14,7 @@ def get_db_connection():
 
 @app.route("/")
 def home():
-    return """
-        <h1>Recherche de données</h1>
-        <form method="POST" action="/search_user">
-            <h3>Recherche d'utilisateur par nom</h3>
-            <input type="text" name="username" placeholder="Nom d'utilisateur">
-            <button type="submit">Rechercher</button>
-        </form>
-        
-        <form method="POST" action="/search_transactions">
-            <h3>Recherche de transactions par utilisateur ID</h3>
-            <input type="text" name="user_id" placeholder="ID d'utilisateur">
-            <button type="submit">Rechercher</button>
-        </form>
-
-        <form method="POST" action="/search_profile">
-            <h3>Recherche de profil par nom d'utilisateur</h3>
-            <input type="text" name="username" placeholder="Nom d'utilisateur">
-            <button type="submit">Rechercher</button>
-        </form>
-    """
+    return render_template("index.html")
 
 
 @app.route("/search_user", methods=["POST"])
@@ -41,11 +22,9 @@ def search_user():
     username = request.form["username"]
 
     query = f"SELECT * FROM users WHERE username = '{username}'"
-
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute(query)
-
     results = cursor.fetchall()
     conn.close()
 
@@ -62,11 +41,9 @@ def search_transactions():
     user_id = request.form["user_id"]
 
     query = f"SELECT * FROM transactions WHERE user_id = {user_id}"
-
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute(query)
-
     results = cursor.fetchall()
     conn.close()
 
@@ -88,11 +65,9 @@ def search_profile():
         JOIN users u ON p.user_id = u.id
         WHERE u.username = '{username}'
     """
-
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute(query)
-
     results = cursor.fetchall()
     conn.close()
 

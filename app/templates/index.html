@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recherche de données</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <h1>Recherche de données</h1>
+
+    <form method="POST" action="/search_user">
+      <h3>Recherche d'utilisateur par nom</h3>
+      <input type="text" name="username" placeholder="Nom d'utilisateur" />
+      <button type="submit">Rechercher</button>
+    </form>
+
+    <form method="POST" action="/search_transactions">
+      <h3>Recherche de transactions par utilisateur ID</h3>
+      <input type="text" name="user_id" placeholder="ID d'utilisateur" />
+      <button type="submit">Rechercher</button>
+    </form>
+
+    <form method="POST" action="/search_profile">
+      <h3>Recherche de profil par nom d'utilisateur</h3>
+      <input type="text" name="username" placeholder="Nom d'utilisateur" />
+      <button type="submit">Rechercher</button>
+    </form>
+  </body>
+</html>
